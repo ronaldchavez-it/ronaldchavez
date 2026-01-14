@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Portal de Resúmenes</title>
-  https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -23,6 +22,7 @@
       color: #1f2937;
       text-align: center;
     }
+
     h2::after {
       content: "";
       display: block;
@@ -44,6 +44,7 @@
       transition: background 0.3s, transform 0.2s;
       margin-bottom: 20px;
     }
+
     button:hover {
       background-color: #2563eb;
       transform: translateY(-2px);
@@ -60,94 +61,88 @@
       font-size: 15px;
       color: #111827;
       line-height: 1.6;
+      
+      /* Ajuste de texto largo */
+      white-space: pre-wrap; 
+      word-wrap: break-word; 
+      overflow-wrap: break-word; 
+
+      /* Scroll horizontal si contenido largo */
       overflow-x: auto;
     }
 
-    /* Estilos para tablas renderizadas desde Markdown */
+    /* Tabla interna opcional */
     .reporte table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 12px;
     }
+
     .reporte th, .reporte td {
       border: 1px solid #ddd;
       padding: 8px;
       text-align: left;
-      vertical-align: top;
     }
+
     .reporte th {
       background-color: #f3f4f6;
       font-weight: 600;
     }
 
     @media (max-width: 600px) {
-      body { padding: 15px; }
-      h2 { font-size: 24px; }
-      .reporte { padding: 20px; }
-      button { width: 100%; }
+      body {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 24px;
+      }
+
+      .reporte {
+        padding: 20px;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
 
-  <h2>Portal de Resúmenes (Azure Foundry)</h2>
+<h2>Portal de Resúmenes (Azure Foundry)</h2>
 
-  <button onclick="generarResumen()">Generar resumen</button>
+<button onclick="generarResumen()">Generar resumen</button>
 
-  <div id="resultado" class="reporte">
-    <strong>REPORTE EJECUTIVO</strong><br>
-    Esperando acción...
-  </div>
+<div id="resultado" class="reporte">
+REPORTE EJECUTIVO    
+Esperando acción...
+</div>
 
-  <!-- 1) Parser de Markdown -->
-  https://cdn.jsdelivr.net/npm/marked/marked.min.js</script>
-  <!-- 2) Sanitizador de HTML -->
-  https://cdn.jsdelivr.net/npm/dompurify@3.0.9/dist/purify.min.js</script>
+<script>
+function generarResumen() {
+  const resultado = document.getElementById("resultado");
+  resultado.textContent = "Generando resumen...\n(esto puede tardar unos segundos)";
 
-  <script>
-    async function generarResumen() {
-      const resultado = document.getElementById("resultado");
-      resultado.textContent = "Generando resumen...\n(esto puede tardar unos segundos)";
-
-      try {
-        const res = await fetch("https://prod-07.westus2.logic.azure.com:443/workflows/57f8b8c837b144bfa39dda67d901ed0b/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=YTk3gHpKFM8Uqj4mp61IGghDE8lYWKtNc81vBbdMENU", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({})
-        });
-
-        if (!res.ok) {
-          const txt = await res.text();
-          throw new Error(`HTTP ${res.status} - ${txt}`);
-        }
-
-        const data = await res.json();
-        // Soporte a distintas claves:
-        const markdown = data.resumen || data.summary || '';
-
-        // Configuración de marked (opcional)
-        marked.setOptions({
-          gfm: true,         // soporta tablas estilo GitHub
-          breaks: true       // saltos de línea como <br>
-        });
-
-        // 1) Markdown -> HTML
-        const htmlSinSanear = marked.parse(markdown || '');
-
-        // 2) Sanitizar por seguridad
-        const htmlSeguro = DOMPurify.sanitize(htmlSinSanear);
-
-        // 3) Pintar HTML resultante
-        resultado.innerHTML = htmlSeguro;
-
-      } catch (err) {
-        console.error(err);
-        resultado.textContent = "ERROR:\n" + (err.message || err);
-      }
-    }
-  </script>
+  fetch("https://prod-07.westus2.logic.azure.com:443/workflows/57f8b8c837b144bfa39dda67d901ed0b/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=YTk3gHpKFM8Uqj4mp61IGghDE8lYWKtNc81vBbdMENU", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({})
+  })
+  .then(res => res.json())
+  .then(data => {
+    resultado.textContent = data.resumen;
+  })
+  .catch(err => {
+    resultado.textContent = "ERROR:\n" + err;
+  });
+}
+</script>
 
 </body>
 </html>
+
+
+    
+
 
 
