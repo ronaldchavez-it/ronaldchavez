@@ -45,9 +45,13 @@
       margin-bottom: 20px;
     }
 
+    /* Contenedor para mostrar ambos botones */
     .acciones {
+      width: 90%;
+      max-width: 900px;
       display: flex;
       gap: 12px;
+      justify-content: center;
       margin-bottom: 20px;
     }
 
@@ -59,7 +63,7 @@
       padding: 12px 25px;
       font-size: 16px;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s, opacity 0.2s;
+      transition: background 0.3s, transform 0.2s;
     }
 
     button:hover {
@@ -67,13 +71,7 @@
       transform: translateY(-2px);
     }
 
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Botón Limpiar (secundario) */
+    /* Botón secundario (Limpiar) */
     .btn-secundario {
       background-color: #6b7280;
     }
@@ -101,8 +99,10 @@
 
   <h2>Portal de Resúmenes (Azure Foundry)</h2>
 
+  <!-- Campo para la consulta -->
   <textarea id="prompt" rows="3" placeholder="Escribe tu consulta aquí..."></textarea>
 
+  <!-- Ambos botones visibles -->
   <div class="acciones">
     <button id="btnGenerar" onclick="generarResumen()">Generar resumen</button>
     <button class="btn-secundario" onclick="limpiar()">Limpiar</button>
@@ -123,7 +123,7 @@ Esperando acción...
       btn.textContent = "Generando...";
       resultado.textContent = "Generando resumen...\n(esto puede tardar unos segundos)";
 
-      // Mismo endpoint del flujo (NO MODIFICAR)
+      // Endpoint del flujo (NO MODIFICAR)
       const url = "https://prod-07.westus2.logic.azure.com:443/workflows/57f8b8c837b144bfa39dda67d901ed0b/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=YTk3gHpKFM8Uqj4mp61IGghDE8lYWKtNc81vBbdMENU";
 
       fetch(url, {
@@ -144,7 +144,7 @@ Esperando acción...
       });
     }
 
-    // Botón Limpiar: solo afecta la UI; no toca el flujo
+    // Limpiar: solo UI
     function limpiar() {
       document.getElementById("prompt").value = "";
       document.getElementById("resultado").textContent =
@@ -156,4 +156,5 @@ Esperando acción...`;
 
 </body>
 </html>
+
 
