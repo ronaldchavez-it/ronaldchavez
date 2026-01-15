@@ -5,10 +5,12 @@
   <title>Portal de Resúmenes</title>
 
   <style>
-    body {
+
+
+body {
       font-family: 'Inter', sans-serif;
-      background-color: #f0f2f5;
-      padding: 30px;
+      background: linear-gradient(to bottom right, #e8eef7, #f5f7fa);
+      padding: 40px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -16,43 +18,54 @@
     }
 
     h2 {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #1f2937;
+      font-size: 32px;
+      font-weight: 700;
+      margin-bottom: 25px;
+      color: #1e293b;
       text-align: center;
+      letter-spacing: 0.5px;
     }
 
     h2::after {
       content: "";
       display: block;
-      width: 80px;
-      height: 3px;
+      width: 100px;
+      height: 4px;
       background-color: #3b82f6;
-      margin: 10px auto 0 auto;
-      border-radius: 2px;
+      margin: 12px auto 0 auto;
+      border-radius: 4px;
     }
 
     textarea {
       width: 90%;
       max-width: 900px;
-      padding: 15px;
-      font-size: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
+      padding: 18px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #d1d5db;
       margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: 0.2s;
+    }
+
+    textarea:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 6px rgba(59,130,246,0.3);
+      outline: none;
     }
 
     button {
       background-color: #3b82f6;
       color: white;
       border: none;
-      border-radius: 8px;
-      padding: 12px 25px;
-      font-size: 16px;
+      border-radius: 10px;
+      padding: 14px 28px;
+      font-size: 17px;
       cursor: pointer;
-      transition: background 0.3s, transform 0.2s;
-      margin: 5px;
+      transition: background 0.25s, transform 0.2s;
+      margin: 8px;
+      font-weight: 600;
+      box-shadow: 0 3px 10px rgba(59,130,246,0.3);
     }
 
     button:hover {
@@ -62,17 +75,21 @@
 
     .reporte {
       background: white;
-      padding: 25px 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 35px 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
       max-width: 900px;
       width: 100%;
-      font-size: 15px;
+      font-size: 16px;
       color: #111827;
-      line-height: 1.6;
+      line-height: 1.7;
       white-space: pre-wrap;
       overflow-x: auto;
+      border-left: 5px solid #3b82f6;
     }
+
+
+    
   </style>
 </head>
 
@@ -122,6 +139,7 @@ function limpiar() {
 
 </body>
 </html>
+
 
 
 
