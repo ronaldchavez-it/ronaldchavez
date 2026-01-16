@@ -17,21 +17,24 @@
     }
 
     h2 {
-      font-size: 28px;
-      font-weight: 600;
-      margin-bottom: 20px;
-      color: #1f2937;
-      text-align: center;
+      
+ font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #ffffff; /* ← hace que el título se vea sobre fondo oscuro */
+  text-align: center;
+
     }
 
-    h2::after {
-      content: "";
-      display: block;
-      width: 80px;
-      height: 3px;
-      background-color: #3b82f6;
-      margin: 10px auto 0 auto;
-      border-radius: 2px;
+content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  background-color: #66b2ff; /* ← línea visible en fondo oscuro */
+  margin: 10px auto 0 auto;
+  border-radius: 2px;
+
+  
     }
 
     textarea {
@@ -126,6 +129,7 @@ function limpiar() {
 
 </body>
 </html>
+
 
 
 
